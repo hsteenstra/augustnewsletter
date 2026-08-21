@@ -1,97 +1,107 @@
-/* =========================================
-   CODE FOR ME — SUMMER 2026
-   JAVASCRIPT
-   ========================================= */
+/* =========================================================
+   CODE FOR ME — SUMMER 2026 NEWSLETTER
+   Interactive JavaScript
+========================================================= */
 
 
-/* =========================================
-   MOBILE MENU
-   ========================================= */
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
 
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
 
-menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
+if (menuToggle && navMenu) {
 
-    if (navMenu.classList.contains("open")) {
-        menuToggle.textContent = "×";
-    } else {
-        menuToggle.textContent = "☰";
-    }
-});
+    menuToggle.addEventListener("click", () => {
 
+        navMenu.classList.toggle("open");
 
-document.querySelectorAll("#navMenu a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        navMenu.classList.remove("open");
-
-        menuToggle.textContent = "☰";
+        menuToggle.textContent =
+            navMenu.classList.contains("open")
+                ? "×"
+                : "☰";
 
     });
 
-});
 
+    // Close menu when clicking a navigation link
 
-/* =========================================
-   DARK MODE
-   ========================================= */
+    navMenu.querySelectorAll("a").forEach(link => {
 
-const themeToggle = document.getElementById("themeToggle");
+        link.addEventListener("click", () => {
 
-themeToggle.addEventListener("click", () => {
+            navMenu.classList.remove("open");
 
-    document.body.classList.toggle("dark");
+            menuToggle.textContent = "☰";
 
-    const dark =
-        document.body.classList.contains("dark");
+        });
 
-    localStorage.setItem(
-        "codeForMeDarkMode",
-        dark
-    );
+    });
 
-});
-
-
-if (
-    localStorage.getItem("codeForMeDarkMode")
-    === "true"
-) {
-    document.body.classList.add("dark");
 }
 
 
-/* =========================================
-   SCROLL PROGRESS
-   ========================================= */
+/* =========================================================
+   SCROLL PROGRESS BAR
+========================================================= */
 
-const progressBar =
-    document.getElementById("progressBar");
+const progressBar = document.getElementById("progressBar");
 
 window.addEventListener("scroll", () => {
 
-    const scrollTop =
-        window.scrollY;
+    const scrollTop = window.scrollY;
 
     const documentHeight =
-        document.documentElement.scrollHeight
-        - window.innerHeight;
+        document.documentElement.scrollHeight -
+        window.innerHeight;
 
-    const progress =
+    const percentage =
         (scrollTop / documentHeight) * 100;
 
-    progressBar.style.width =
-        `${progress}%`;
+    if (progressBar) {
+        progressBar.style.width = `${percentage}%`;
+    }
 
 });
 
 
-/* =========================================
-   ANIMATED STATS
-   ========================================= */
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+const savedTheme =
+    localStorage.getItem("codeForMeTheme");
+
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+}
+
+if (themeToggle) {
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark-mode");
+
+        const isDark =
+            document.body.classList.contains("dark-mode");
+
+        localStorage.setItem(
+            "codeForMeTheme",
+            isDark ? "dark" : "light"
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   ANIMATED STAT NUMBERS
+========================================================= */
 
 const statNumbers =
     document.querySelectorAll(".stat-number");
@@ -110,79 +120,904 @@ function animateStats() {
         const target =
             number.dataset.target;
 
-        if (!target || target === "∞") return;
+        if (target === "∞") {
+            number.textContent = "∞";
+            return;
+        }
+
+        const finalNumber =
+            parseInt(target);
 
         let current = 0;
 
-        const increment =
-            Math.max(
-                1,
-                Math.ceil(target / 20)
-            );
+        const duration = 1200;
 
-        const interval =
-            setInterval(() => {
+        const startTime = performance.now();
 
-                current += increment;
 
-                if (current >= target) {
+        function update(currentTime) {
 
-                    current = target;
+            const elapsed =
+                currentTime - startTime;
 
-                    clearInterval(interval);
+            const progress =
+                Math.min(elapsed / duration, 1);
 
-                }
+            const eased =
+                1 - Math.pow(1 - progress, 3);
+
+            current =
+                Math.floor(finalNumber * eased);
+
+            number.textContent = current;
+
+
+            if (progress < 1) {
+
+                requestAnimationFrame(update);
+
+            } else {
 
                 number.textContent =
-                    current;
+                    finalNumber;
 
-            }, 55);
+            }
+
+        }
+
+
+        requestAnimationFrame(update);
 
     });
 
 }
 
 
-const statsObserver =
+/* =========================================================
+   INTERSECTION OBSERVER
+========================================================= */
+
+const observer =
     new IntersectionObserver(
         entries => {
 
             entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                if (
+                    entry.isIntersecting &&
+                    entry.target.classList.contains(
+                        "stats-grid"
+                    )
+                ) {
+
                     animateStats();
+
                 }
 
             });
 
         },
         {
-            threshold: .3
+            threshold: 0.25
         }
     );
 
 
-const statsSection =
+const statsGrid =
     document.querySelector(".stats-grid");
 
-if (statsSection) {
-    statsObserver.observe(statsSection);
+if (statsGrid) {
+    observer.observe(statsGrid);
 }
 
 
-/* =========================================
-   REVEAL ANIMATIONS
-   ========================================= */
+/* =========================================================
+   CODECOURSE
+========================================================= */
 
-const revealElements =
-    document.querySelectorAll(
-        ".section, .teacher-callout, .feature-card"
+const lessons = [
+
+    {
+        title: "Getting Started",
+
+        description:
+            "Your first step into programming. Learn what code is, how programs work, and write your first Python command.",
+
+        code:
+            'print("Hello, Code For ME!")',
+
+        output:
+            "Hello, Code For ME!"
+    },
+
+
+    {
+        title: "Variables",
+
+        description:
+            "Variables let your programs remember information. Store names, numbers, scores, and just about anything else.",
+
+        code:
+            'name = "Code For ME"\\nprint(name)',
+
+        output:
+            "Code For ME"
+    },
+
+
+    {
+        title: "Input",
+
+        description:
+            "Make your programs interactive by allowing the person using them to give your code information.",
+
+        code:
+            'name = input("What is your name? ")\\nprint("Hi, " + name + "!")',
+
+        output:
+            "Hi, coder!"
+    },
+
+
+    {
+        title: "Conditionals",
+
+        description:
+            "Teach your program how to make decisions using if statements.",
+
+        code:
+            'score = 95\\n\\nif score >= 90:\\n    print("Amazing!")',
+
+        output:
+            "Amazing!"
+    },
+
+
+    {
+        title: "Loops",
+
+        description:
+            "Loops allow your code to repeat an action. This is where programs can start becoming seriously powerful.",
+
+        code:
+            'for i in range(5):\\n    print("Code!")',
+
+        output:
+            "Code! Code! Code! Code! Code!"
+    },
+
+
+    {
+        title: "Build Something",
+
+        description:
+            "Put everything together and use your new skills to build something that is completely your own.",
+
+        code:
+            'message = "I built this!"\\nprint(message)',
+
+        output:
+            "I built this!"
+    }
+
+];
+
+
+const lessonButtons =
+    document.querySelectorAll(".lesson");
+
+
+const lessonTitle =
+    document.getElementById("lessonTitle");
+
+
+const lessonDescription =
+    document.getElementById("lessonDescription");
+
+
+const lessonCode =
+    document.getElementById("lessonCode");
+
+
+const lessonOutput =
+    document.getElementById("lessonOutput");
+
+
+const lessonNumber =
+    document.getElementById("lessonNumber");
+
+
+const lessonBreadcrumb =
+    document.getElementById("lessonBreadcrumb");
+
+
+const courseProgress =
+    document.getElementById("courseProgress");
+
+
+const coursePercent =
+    document.getElementById("coursePercent");
+
+
+function loadLesson(index) {
+
+    const lesson =
+        lessons[index];
+
+    if (!lesson) return;
+
+
+    lessonButtons.forEach((button, buttonIndex) => {
+
+        button.classList.toggle(
+            "active",
+            buttonIndex === index
+        );
+
+    });
+
+
+    if (lessonTitle) {
+        lessonTitle.textContent =
+            lesson.title;
+    }
+
+
+    if (lessonDescription) {
+        lessonDescription.textContent =
+            lesson.description;
+    }
+
+
+    if (lessonCode) {
+        lessonCode.textContent =
+            lesson.code;
+    }
+
+
+    if (lessonOutput) {
+        lessonOutput.textContent =
+            lesson.output;
+    }
+
+
+    const number =
+        String(index + 1).padStart(2, "0");
+
+
+    if (lessonNumber) {
+        lessonNumber.textContent =
+            `LESSON ${number}`;
+    }
+
+
+    if (lessonBreadcrumb) {
+        lessonBreadcrumb.textContent =
+            `LESSON ${number} / 06`;
+    }
+
+
+    const percentage =
+        Math.round(
+            ((index + 1) / lessons.length) * 100
+        );
+
+
+    if (courseProgress) {
+        courseProgress.style.width =
+            `${percentage}%`;
+    }
+
+
+    if (coursePercent) {
+        coursePercent.textContent =
+            `${percentage}%`;
+    }
+
+}
+
+
+lessonButtons.forEach((button, index) => {
+
+    button.addEventListener("click", () => {
+
+        loadLesson(index);
+
+    });
+
+});
+
+
+/* =========================================================
+   COPY CODE BUTTON
+========================================================= */
+
+const copyCode =
+    document.getElementById("copyCode");
+
+
+if (copyCode) {
+
+    copyCode.addEventListener("click", async () => {
+
+        const text =
+            lessonCode.textContent;
+
+
+        try {
+
+            await navigator.clipboard.writeText(text);
+
+            copyCode.textContent =
+                "Copied! ✓";
+
+
+            setTimeout(() => {
+
+                copyCode.textContent =
+                    "Copy";
+
+            }, 1500);
+
+        } catch (error) {
+
+            copyCode.textContent =
+                "Select code";
+
+            setTimeout(() => {
+
+                copyCode.textContent =
+                    "Copy";
+
+            }, 1500);
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   JULY CAMP TABS
+========================================================= */
+
+const campTabs =
+    document.querySelectorAll(".camp-tab");
+
+
+const campPanels =
+    document.querySelectorAll(".camp-panel");
+
+
+campTabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+        const selectedCamp =
+            tab.dataset.camp;
+
+
+        campTabs.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+        tab.classList.add("active");
+
+
+        campPanels.forEach(panel => {
+
+            panel.classList.remove("active");
+
+        });
+
+
+        const selectedPanel =
+            document.getElementById(selectedCamp);
+
+
+        if (selectedPanel) {
+
+            selectedPanel.classList.add("active");
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   IMAGE LIGHTBOX
+========================================================= */
+
+const galleryImages =
+    document.querySelectorAll(".gallery-image");
+
+
+const lightbox =
+    document.getElementById("lightbox");
+
+
+const lightboxImage =
+    document.getElementById("lightboxImage");
+
+
+const lightboxClose =
+    document.getElementById("lightboxClose");
+
+
+galleryImages.forEach(image => {
+
+    image.addEventListener("click", () => {
+
+        if (!lightbox || !lightboxImage) return;
+
+
+        lightboxImage.src =
+            image.src;
+
+
+        lightboxImage.alt =
+            image.alt;
+
+
+        lightbox.classList.add("open");
+
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.classList.add(
+            "lightbox-open"
+        );
+
+    });
+
+});
+
+
+function closeLightbox() {
+
+    if (!lightbox) return;
+
+
+    lightbox.classList.remove("open");
+
+
+    lightbox.setAttribute(
+        "aria-hidden",
+        "true"
     );
 
 
-revealElements.forEach(element => {
-    element.classList.add("reveal");
+    document.body.classList.remove(
+        "lightbox-open"
+    );
+
+}
+
+
+if (lightboxClose) {
+
+    lightboxClose.addEventListener(
+        "click",
+        closeLightbox
+    );
+
+}
+
+
+if (lightbox) {
+
+    lightbox.addEventListener("click", event => {
+
+        if (event.target === lightbox) {
+
+            closeLightbox();
+
+        }
+
+    });
+
+}
+
+
+document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+
+        closeLightbox();
+
+    }
+
 });
+
+
+/* =========================================================
+   BROWN UNIVERSITY — STAR FIELD
+========================================================= */
+
+const starField =
+    document.getElementById("starField");
+
+
+if (starField) {
+
+    const starCount =
+        window.innerWidth < 600
+            ? 70
+            : 130;
+
+
+    for (let i = 0; i < starCount; i++) {
+
+        const star =
+            document.createElement("span");
+
+
+        star.className =
+            "generated-star";
+
+
+        const size =
+            Math.random() * 3 + 1;
+
+
+        star.style.width =
+            `${size}px`;
+
+
+        star.style.height =
+            `${size}px`;
+
+
+        star.style.left =
+            `${Math.random() * 100}%`;
+
+
+        star.style.top =
+            `${Math.random() * 100}%`;
+
+
+        star.style.animationDelay =
+            `${Math.random() * 4}s`;
+
+
+        starField.appendChild(star);
+
+    }
+
+}
+
+
+/* =========================================================
+   BROWN UNIVERSITY — RUN THE EXPERIMENT
+========================================================= */
+
+const runResearch =
+    document.getElementById("runResearch");
+
+
+const logisticResult =
+    document.getElementById("logisticResult");
+
+
+const forestResult =
+    document.getElementById("forestResult");
+
+
+const researchResult =
+    document.getElementById("researchResult");
+
+
+const logisticComputer =
+    document.getElementById("logisticComputer");
+
+
+const forestComputer =
+    document.getElementById("forestComputer");
+
+
+let experimentRunning = false;
+
+
+function sleep(ms) {
+
+    return new Promise(resolve => {
+
+        setTimeout(resolve, ms);
+
+    });
+
+}
+
+
+async function runExperiment() {
+
+    if (experimentRunning) return;
+
+    experimentRunning = true;
+
+
+    if (runResearch) {
+
+        runResearch.disabled = true;
+
+        runResearch.textContent =
+            "Running Python experiment...";
+
+    }
+
+
+    if (researchResult) {
+
+        researchResult.textContent =
+            "Loading Gaia data...";
+
+    }
+
+
+    if (logisticResult) {
+
+        logisticResult.textContent =
+            "LOADING DATA...";
+
+    }
+
+
+    if (forestResult) {
+
+        forestResult.textContent =
+            "LOADING DATA...";
+
+    }
+
+
+    await sleep(1000);
+
+
+    if (researchResult) {
+
+        researchResult.textContent =
+            "Python is analyzing the stars...";
+
+    }
+
+
+    if (logisticComputer) {
+
+        logisticComputer.classList.add(
+            "computing"
+        );
+
+    }
+
+
+    if (forestComputer) {
+
+        forestComputer.classList.add(
+            "computing"
+        );
+
+    }
+
+
+    if (logisticResult) {
+
+        logisticResult.textContent =
+            "ANALYZING...";
+
+    }
+
+
+    await sleep(1800);
+
+
+    if (logisticResult) {
+
+        logisticResult.textContent =
+            "QUASAR DETECTED ✓";
+
+    }
+
+
+    if (researchResult) {
+
+        researchResult.textContent =
+            "Logistic Regression found a candidate.";
+
+    }
+
+
+    await sleep(1200);
+
+
+    if (forestResult) {
+
+        forestResult.textContent =
+            "ANALYZING...";
+
+    }
+
+
+    await sleep(1800);
+
+
+    if (forestResult) {
+
+        forestResult.textContent =
+            "QUASAR DETECTED ✓";
+
+    }
+
+
+    if (researchResult) {
+
+        researchResult.textContent =
+            "Both models identified the quasar.";
+
+    }
+
+
+    if (logisticComputer) {
+
+        logisticComputer.classList.remove(
+            "computing"
+        );
+
+        logisticComputer.classList.add(
+            "success"
+        );
+
+    }
+
+
+    if (forestComputer) {
+
+        forestComputer.classList.remove(
+            "computing"
+        );
+
+        forestComputer.classList.add(
+            "success"
+        );
+
+    }
+
+
+    await sleep(800);
+
+
+    if (researchResult) {
+
+        researchResult.innerHTML =
+            "<strong>✓ Experiment complete.</strong> Python helped both models identify the quasar.";
+
+    }
+
+
+    if (runResearch) {
+
+        runResearch.disabled = false;
+
+        runResearch.textContent =
+            "↻ Run it again";
+
+    }
+
+
+    experimentRunning = false;
+
+}
+
+
+if (runResearch) {
+
+    runResearch.addEventListener(
+        "click",
+        runExperiment
+    );
+
+}
+
+
+/* =========================================================
+   CELEBRATION BUTTON
+========================================================= */
+
+const celebrateButton =
+    document.getElementById(
+        "celebrateButton"
+    );
+
+
+if (celebrateButton) {
+
+    celebrateButton.addEventListener(
+        "click",
+        () => {
+
+            createConfetti();
+
+        }
+    );
+
+}
+
+
+function createConfetti() {
+
+    const symbols = [
+        "✦",
+        "✧",
+        "●",
+        "◆",
+        "✦",
+        "</>",
+        "01"
+    ];
+
+
+    for (let i = 0; i < 45; i++) {
+
+        const piece =
+            document.createElement("div");
+
+
+        piece.className =
+            "confetti-piece";
+
+
+        piece.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+
+        piece.style.left =
+            `${Math.random() * 100}vw`;
+
+
+        piece.style.animationDelay =
+            `${Math.random() * 0.5}s`;
+
+
+        piece.style.fontSize =
+            `${Math.random() * 10 + 10}px`;
+
+
+        document.body.appendChild(piece);
+
+
+        setTimeout(() => {
+
+            piece.remove();
+
+        }, 3000);
+
+    }
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".section, .stat-card, .camp-story, .resource-card, .teacher-callout, .feature-card"
+    );
 
 
 const revealObserver =
@@ -194,8 +1029,9 @@ const revealObserver =
                 if (entry.isIntersecting) {
 
                     entry.target.classList.add(
-                        "visible"
+                        "revealed"
                     );
+
 
                     revealObserver.unobserve(
                         entry.target
@@ -207,550 +1043,66 @@ const revealObserver =
 
         },
         {
-            threshold: .08
+            threshold: 0.08
         }
     );
 
 
 revealElements.forEach(element => {
+
+    element.classList.add(
+        "reveal-ready"
+    );
+
+
     revealObserver.observe(element);
-});
-
-
-/* =========================================
-   COURSE LESSON DATA
-   ========================================= */
-
-const lessons = [
-
-    {
-        title: "Getting Started",
-        description:
-            "Your first step into programming. Learn what code is, how programs work, and write your first Python command.",
-        code:
-            'print("Hello, Code For ME!")',
-        output:
-            "Hello, Code For ME!",
-        percent: 17
-    },
-
-    {
-        title: "Variables",
-        description:
-            "Give information a name. Variables let your programs remember things and use them later.",
-        code:
-            'name = "Maine"',
-        output:
-            "Maine",
-        percent: 33
-    },
-
-    {
-        title: "Input",
-        description:
-            "Make your programs interactive by allowing the person using them to enter information.",
-        code:
-            'name = input("What is your name?")',
-        output:
-            "What is your name?",
-        percent: 50
-    },
-
-    {
-        title: "Conditionals",
-        description:
-            "Teach your program how to make decisions using if and else statements.",
-        code:
-            'if score > 10:\n    print("Great job!")',
-        output:
-            "Great job!",
-        percent: 67
-    },
-
-    {
-        title: "Loops",
-        description:
-            "Repeat code without writing the same thing over and over again.",
-        code:
-            'for i in range(5):\n    print(i)',
-        output:
-            "0 1 2 3 4",
-        percent: 83
-    },
-
-    {
-        title: "Build Something",
-        description:
-            "Bring everything together and build something that is actually yours.",
-        code:
-            'print("I built this!")',
-        output:
-            "I built this!",
-        percent: 100
-    }
-
-];
-
-
-const lessonButtons =
-    document.querySelectorAll(".lesson");
-
-const lessonTitle =
-    document.getElementById("lessonTitle");
-
-const lessonDescription =
-    document.getElementById("lessonDescription");
-
-const lessonCode =
-    document.getElementById("lessonCode");
-
-const lessonOutput =
-    document.getElementById("lessonOutput");
-
-const lessonNumber =
-    document.getElementById("lessonNumber");
-
-const lessonBreadcrumb =
-    document.getElementById("lessonBreadcrumb");
-
-const courseProgress =
-    document.getElementById("courseProgress");
-
-const coursePercent =
-    document.getElementById("coursePercent");
-
-
-function loadLesson(index) {
-
-    const lesson =
-        lessons[index];
-
-    lessonButtons.forEach(button => {
-        button.classList.remove("active");
-    });
-
-    lessonButtons[index]
-        .classList.add("active");
-
-    lessonTitle.textContent =
-        lesson.title;
-
-    lessonDescription.textContent =
-        lesson.description;
-
-    lessonCode.textContent =
-        lesson.code;
-
-    lessonOutput.textContent =
-        lesson.output;
-
-    lessonNumber.textContent =
-        `LESSON ${String(index + 1).padStart(2, "0")}`;
-
-    lessonBreadcrumb.textContent =
-        `LESSON ${String(index + 1).padStart(2, "0")} / 06`;
-
-    courseProgress.style.width =
-        `${lesson.percent}%`;
-
-    coursePercent.textContent =
-        `${lesson.percent}%`;
-
-}
-
-
-lessonButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const index =
-            Number(
-                button.dataset.lesson
-            );
-
-        loadLesson(index);
-
-    });
 
 });
 
 
-/* =========================================
-   COPY CODE
-   ========================================= */
+/* =========================================================
+   TEXTBOOK BUTTON
+=========================================================
 
-const copyButton =
-    document.getElementById("copyCode");
+   Replace the "#" in index.html with your real
+   textbook ordering URL.
 
-copyButton.addEventListener("click", async () => {
+========================================================= */
 
-    try {
-
-        await navigator.clipboard.writeText(
-            lessonCode.textContent
-        );
-
-        copyButton.textContent =
-            "Copied!";
-
-        setTimeout(() => {
-
-            copyButton.textContent =
-                "Copy";
-
-        }, 1400);
-
-    } catch (error) {
-
-        copyButton.textContent =
-            "Copy failed";
-
-    }
-
-});
-
-
-/* =========================================
-   CAMP TABS
-   ========================================= */
-
-const campTabs =
-    document.querySelectorAll(".camp-tab");
-
-const campPanels =
-    document.querySelectorAll(".camp-panel");
-
-
-campTabs.forEach(tab => {
-
-    tab.addEventListener("click", () => {
-
-        const selected =
-            tab.dataset.camp;
-
-        campTabs.forEach(item => {
-            item.classList.remove("active");
-        });
-
-        campPanels.forEach(panel => {
-            panel.classList.remove("active");
-        });
-
-        tab.classList.add("active");
-
-        document
-            .getElementById(selected)
-            .classList.add("active");
-
-    });
-
-});
-
-
-/* =========================================
-   PHOTO LIGHTBOX
-   ========================================= */
-
-const lightbox =
-    document.getElementById("lightbox");
-
-const lightboxImage =
-    document.getElementById("lightboxImage");
-
-const lightboxClose =
-    document.getElementById("lightboxClose");
-
-
-document.querySelectorAll(".gallery-image")
-    .forEach(image => {
-
-        image.addEventListener("click", () => {
-
-            lightboxImage.src =
-                image.src;
-
-            lightboxImage.alt =
-                image.alt;
-
-            lightbox.classList.add("active");
-
-            lightbox.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-        });
-
-    });
-
-
-function closeLightbox() {
-
-    lightbox.classList.remove("active");
-
-    lightbox.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-}
-
-
-lightboxClose.addEventListener(
-    "click",
-    closeLightbox
-);
-
-
-lightbox.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target === lightbox
-        ) {
-            closeLightbox();
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Escape"
-        ) {
-            closeLightbox();
-        }
-
-    }
-);
-
-
-/* =========================================
-   RESEARCH STAR FIELD
-   ========================================= */
-
-const starField =
-    document.getElementById("starField");
-
-
-function createStars() {
-
-    if (!starField) return;
-
-    for (
-        let i = 0;
-        i < 100;
-        i++
-    ) {
-
-        const star =
-            document.createElement("span");
-
-        star.className = "star";
-
-        star.style.left =
-            `${Math.random() * 100}%`;
-
-        star.style.top =
-            `${Math.random() * 100}%`;
-
-        star.style.opacity =
-            `${Math.random() * .7 + .2}`;
-
-        const size =
-            Math.random() * 3 + 1;
-
-        star.style.width =
-            `${size}px`;
-
-        star.style.height =
-            `${size}px`;
-
-        starField.appendChild(star);
-
-    }
-
-}
-
-
-createStars();
-
-
-/* =========================================
-   RESEARCH ANIMATION
-   ========================================= */
-
-const runResearch =
-    document.getElementById("runResearch");
-
-
-runResearch.addEventListener(
-    "click",
-    () => {
-
-        runResearch.textContent =
-            "⟳ Analyzing Gaia data...";
-
-        const stars =
-            document.querySelectorAll(".star");
-
-        stars.forEach((star, index) => {
-
-            setTimeout(() => {
-
-                star.style.transform =
-                    "scale(2)";
-
-                star.style.opacity =
-                    "1";
-
-            }, index * 12);
-
-        });
-
-
-        setTimeout(() => {
-
-            runResearch.textContent =
-                "✓ Quasar candidates identified";
-
-        }, 1800);
-
-
-        setTimeout(() => {
-
-            runResearch.textContent =
-                "▶ Run the experiment";
-
-        }, 4000);
-
-    }
-);
-
-
-/* =========================================
-   CELEBRATE BUTTON
-   ========================================= */
-
-const celebrateButton =
+const textbookButton =
     document.getElementById(
-        "celebrateButton"
+        "textbookButton"
     );
 
 
-celebrateButton.addEventListener(
-    "click",
-    () => {
+if (textbookButton) {
 
-        createConfetti();
+    textbookButton.addEventListener(
+        "click",
+        event => {
 
-        celebrateButton.textContent =
-            "✦ Summer = success!";
+            if (
+                textbookButton.getAttribute("href") === "#"
+            ) {
 
-        setTimeout(() => {
-
-            celebrateButton.textContent =
-                "✦ Celebrate with us";
-
-        }, 2500);
-
-    }
-);
+                event.preventDefault();
 
 
-function createConfetti() {
+                alert(
+                    "Add your textbook ordering link to this button in index.html!"
+                );
 
-    const pieces = 70;
-
-    for (
-        let i = 0;
-        i < pieces;
-        i++
-    ) {
-
-        const piece =
-            document.createElement("div");
-
-        piece.style.position =
-            "fixed";
-
-        piece.style.left =
-            `${Math.random() * 100}vw`;
-
-        piece.style.top =
-            "-10px";
-
-        piece.style.width =
-            `${Math.random() * 8 + 5}px`;
-
-        piece.style.height =
-            `${Math.random() * 12 + 6}px`;
-
-        piece.style.background =
-            [
-                "#df756f",
-                "#58b7b2",
-                "#f2bd32",
-                "#4c82a5"
-            ][
-                Math.floor(
-                    Math.random() * 4
-                )
-            ];
-
-        piece.style.zIndex =
-            "5000";
-
-        piece.style.borderRadius =
-            "2px";
-
-        document.body.appendChild(piece);
-
-
-        const duration =
-            Math.random() * 1800 + 1800;
-
-        const drift =
-            Math.random() * 200 - 100;
-
-
-        piece.animate(
-            [
-                {
-                    transform:
-                        "translateY(0) rotate(0deg)",
-                    opacity: 1
-                },
-                {
-                    transform:
-                        `translate(${drift}px, 110vh) rotate(720deg)`,
-                    opacity: 0
-                }
-            ],
-            {
-                duration: duration,
-                easing: "cubic-bezier(.2,.8,.3,1)"
             }
-        );
 
-
-        setTimeout(() => {
-            piece.remove();
-        }, duration);
-
-    }
+        }
+    );
 
 }
 
 
-/* =========================================
-   SMOOTH MAINE PUBLIC PLACEHOLDER
-   ========================================= */
+/* =========================================================
+   MAINE PUBLIC BUTTON
+========================================================= */
 
 const mainePublicLink =
     document.getElementById(
@@ -758,39 +1110,191 @@ const mainePublicLink =
     );
 
 
-mainePublicLink.addEventListener(
-    "click",
-    event => {
+if (mainePublicLink) {
 
-        if (
-            mainePublicLink.getAttribute("href")
-            === "#"
-        ) {
+    mainePublicLink.addEventListener(
+        "click",
+        event => {
 
-            event.preventDefault();
+            if (
+                mainePublicLink.getAttribute("href") === "#"
+            ) {
 
-            alert(
-                "Add the Maine Public article URL to index.html first!"
-            );
+                event.preventDefault();
+
+
+                alert(
+                    "Add the Maine Public article URL to this button in index.html!"
+                );
+
+            }
 
         }
+    );
 
-    }
+}
+
+
+/* =========================================================
+   SMOOTH SCROLLING
+========================================================= */
+
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(anchor => {
+
+    anchor.addEventListener(
+        "click",
+        function(event) {
+
+            const targetId =
+                this.getAttribute("href");
+
+
+            if (
+                !targetId ||
+                targetId === "#"
+            ) {
+                return;
+            }
+
+
+            const target =
+                document.querySelector(
+                    targetId
+                );
+
+
+            if (target) {
+
+                event.preventDefault();
+
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   CURSOR GLOW — DESKTOP ONLY
+========================================================= */
+
+const cursorGlow =
+    document.createElement("div");
+
+
+cursorGlow.className =
+    "cursor-glow";
+
+
+document.body.appendChild(
+    cursorGlow
 );
 
 
-/* =========================================
-   BACK TO TOP
-   ========================================= */
+if (window.matchMedia(
+    "(pointer: fine)"
+).matches) {
 
-window.addEventListener(
-    "load",
-    () => {
+    document.addEventListener(
+        "mousemove",
+        event => {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "instant"
-        });
+            cursorGlow.style.left =
+                `${event.clientX}px`;
 
-    }
+
+            cursorGlow.style.top =
+                `${event.clientY}px`;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PARALLAX HERO
+========================================================= */
+
+const hero =
+    document.querySelector(".hero");
+
+
+const heroGrid =
+    document.querySelector(".hero-grid");
+
+
+if (
+    hero &&
+    heroGrid &&
+    window.matchMedia(
+        "(pointer: fine)"
+    ).matches
+) {
+
+    hero.addEventListener(
+        "mousemove",
+        event => {
+
+            const rect =
+                hero.getBoundingClientRect();
+
+
+            const x =
+                (event.clientX - rect.left) /
+                rect.width -
+                0.5;
+
+
+            const y =
+                (event.clientY - rect.top) /
+                rect.height -
+                0.5;
+
+
+            heroGrid.style.transform =
+                `translate(${x * 15}px, ${y * 15}px)`;
+
+        }
+    );
+
+
+    hero.addEventListener(
+        "mouseleave",
+        () => {
+
+            heroGrid.style.transform =
+                "translate(0, 0)";
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+loadLesson(0);
+
+
+console.log(
+    "%cCode For ME — Summer 2026",
+    "font-size: 20px; font-weight: bold;"
+);
+
+
+console.log(
+    "%cKeep building. Keep teaching. Keep coding.",
+    "font-size: 14px;"
 );
