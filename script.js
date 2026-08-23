@@ -1332,73 +1332,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 180);
 
 
-    /* =========================================
-   TEACHER NETWORK ANIMATION
-========================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const network = document.getElementById("teacherNetwork");
-    const nodes = document.querySelectorAll(".teacher-node");
-    const counter = document.getElementById("teacherCount");
-
-    if (!network || !counter || !nodes.length) {
-        return;
-    }
-
-
     /* -----------------------------------------
-       COUNT 0 → 10
+       NODE INTERACTION
     ----------------------------------------- */
 
-    let count = 0;
+    nodes.forEach(node => {
 
-    const counterAnimation = setInterval(function () {
+        node.addEventListener("mouseenter", () => {
 
-        count++;
+            const teacherNumber = node.dataset.teacher;
 
-        counter.textContent = count;
+            tooltip.innerHTML =
+                `TEACHER <strong>${teacherNumber}</strong>`;
 
-        if (count === 10) {
-            clearInterval(counterAnimation);
-        }
+            tooltip.classList.add("visible");
 
-    }, 150);
+            node.classList.add("active");
 
+            nodes.forEach(other => {
 
-    /* -----------------------------------------
-       TEACHER NODE INTERACTION
-    ----------------------------------------- */
-
-    nodes.forEach(function (node) {
-
-        node.addEventListener("mouseenter", function () {
-
-            nodes.forEach(function (otherNode) {
-
-                if (otherNode !== node) {
-                    otherNode.style.opacity = "0.25";
+                if (other !== node) {
+                    other.style.opacity = "0.3";
                 }
 
             });
 
-            node.style.opacity = "1";
-
         });
 
 
-        node.addEventListener("mouseleave", function () {
+        node.addEventListener("mouseleave", () => {
 
-            nodes.forEach(function (otherNode) {
-                otherNode.style.opacity = "1";
+            tooltip.classList.remove("visible");
+
+            node.classList.remove("active");
+
+            nodes.forEach(other => {
+                other.style.opacity = "1";
             });
 
         });
 
 
-        /* Click burst */
+        /* Click creates a little burst */
 
-        node.addEventListener("click", function () {
+        node.addEventListener("click", () => {
 
             node.animate(
                 [
@@ -1406,14 +1383,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         transform: "scale(1)"
                     },
                     {
-                        transform: "scale(1.5)"
+                        transform: "scale(1.6)"
                     },
                     {
                         transform: "scale(1)"
                     }
                 ],
                 {
-                    duration: 500,
+                    duration: 450,
                     easing: "ease-out"
                 }
             );
@@ -1424,35 +1401,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* -----------------------------------------
-       RANDOM TEACHER PULSE
+       OCCASIONAL NETWORK PULSE
     ----------------------------------------- */
 
-    function pulseTeacher() {
+    function pulseNetwork() {
 
-        const randomIndex =
-            Math.floor(Math.random() * nodes.length);
+        const randomNode =
+            nodes[Math.floor(Math.random() * nodes.length)];
 
-        const node = nodes[randomIndex];
-
-        node.animate(
+        randomNode.animate(
             [
                 {
+                    transform: "scale(1)",
                     boxShadow:
                         "0 0 0 rgba(98,216,207,0)"
                 },
-
                 {
+                    transform: "scale(1.35)",
                     boxShadow:
-                        "0 0 35px rgba(98,216,207,0.9)"
+                        "0 0 30px rgba(98,216,207,0.7)"
                 },
-
                 {
+                    transform: "scale(1)",
                     boxShadow:
                         "0 0 0 rgba(98,216,207,0)"
                 }
             ],
             {
-                duration: 1000,
+                duration: 1200,
                 easing: "ease-in-out"
             }
         );
@@ -1460,6 +1436,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    setInterval(pulseTeacher, 1200);
+    setInterval(pulseNetwork, 1800);
 
 });
