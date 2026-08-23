@@ -3241,3 +3241,69 @@ section.gallery-section .gallery-item:nth-child(4) {
     }
 
 }
+
+/* =========================================
+   BROWN UNIVERSITY — SIDE BY SIDE
+========================================= */
+
+.brown-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) !important;
+    gap: 70px !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.brown-copy {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+
+.research-visual {
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Keep the two computers inside the visual side by side */
+.research-computers {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 24px !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+}
+
+.research-computer {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+}
+
+/* Prevent the research visual from becoming too wide */
+.research-visual {
+    max-width: 100% !important;
+}
+
+/* Stack everything on smaller screens */
+@media (max-width: 900px) {
+    .brown-grid {
+        grid-template-columns: 1fr !important;
+        gap: 50px !important;
+    }
+
+    .research-computers {
+        flex-direction: row !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .research-computers {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .research-computer {
+        width: 100% !important;
+    }
+}
