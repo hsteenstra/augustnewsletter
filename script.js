@@ -1298,3 +1298,144 @@ console.log(
     "%cKeep building. Keep teaching. Keep coding.",
     "font-size: 14px;"
 );
+
+/* =========================================
+   INTERACTIVE TEACHER NETWORK
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const network = document.getElementById("teacherNetwork");
+    const nodes = document.querySelectorAll(".teacher-node");
+    const counter = document.getElementById("teacherCount");
+    const tooltip = document.getElementById("teacherTooltip");
+
+    if (!network || !nodes.length) return;
+
+
+    /* -----------------------------------------
+       COUNTER ANIMATION
+    ----------------------------------------- */
+
+    let count = 0;
+
+    const countUp = setInterval(() => {
+
+        count++;
+
+        counter.textContent = count;
+
+        if (count >= 10) {
+            clearInterval(countUp);
+        }
+
+    }, 180);
+
+
+    /* -----------------------------------------
+       NODE INTERACTION
+    ----------------------------------------- */
+
+    nodes.forEach(node => {
+
+        node.addEventListener("mouseenter", () => {
+
+            const teacherNumber = node.dataset.teacher;
+
+            tooltip.innerHTML =
+                `TEACHER <strong>${teacherNumber}</strong>`;
+
+            tooltip.classList.add("visible");
+
+            node.classList.add("active");
+
+            nodes.forEach(other => {
+
+                if (other !== node) {
+                    other.style.opacity = "0.3";
+                }
+
+            });
+
+        });
+
+
+        node.addEventListener("mouseleave", () => {
+
+            tooltip.classList.remove("visible");
+
+            node.classList.remove("active");
+
+            nodes.forEach(other => {
+                other.style.opacity = "1";
+            });
+
+        });
+
+
+        /* Click creates a little burst */
+
+        node.addEventListener("click", () => {
+
+            node.animate(
+                [
+                    {
+                        transform: "scale(1)"
+                    },
+                    {
+                        transform: "scale(1.6)"
+                    },
+                    {
+                        transform: "scale(1)"
+                    }
+                ],
+                {
+                    duration: 450,
+                    easing: "ease-out"
+                }
+            );
+
+        });
+
+    });
+
+
+    /* -----------------------------------------
+       OCCASIONAL NETWORK PULSE
+    ----------------------------------------- */
+
+    function pulseNetwork() {
+
+        const randomNode =
+            nodes[Math.floor(Math.random() * nodes.length)];
+
+        randomNode.animate(
+            [
+                {
+                    transform: "scale(1)",
+                    boxShadow:
+                        "0 0 0 rgba(98,216,207,0)"
+                },
+                {
+                    transform: "scale(1.35)",
+                    boxShadow:
+                        "0 0 30px rgba(98,216,207,0.7)"
+                },
+                {
+                    transform: "scale(1)",
+                    boxShadow:
+                        "0 0 0 rgba(98,216,207,0)"
+                }
+            ],
+            {
+                duration: 1200,
+                easing: "ease-in-out"
+            }
+        );
+
+    }
+
+
+    setInterval(pulseNetwork, 1800);
+
+});
