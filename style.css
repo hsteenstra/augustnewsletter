@@ -3129,3 +3129,90 @@ footer {
     height: 100%;
     object-fit: cover;
 }
+
+/* =========================================
+   SUMMER PHOTO GALLERY
+========================================= */
+
+section.gallery-section {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+section.gallery-section .section-heading {
+    width: 100% !important;
+    margin-bottom: 50px !important;
+}
+
+section.gallery-section .gallery-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.85fr !important;
+    grid-template-rows: 320px 320px !important;
+
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+section.gallery-section .gallery-item {
+    width: 100% !important;
+    height: 100% !important;
+
+    overflow: hidden !important;
+    border-radius: 20px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+section.gallery-section .gallery-item img.gallery-image {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+    object-fit: cover !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+section.gallery-section .gallery-large {
+    grid-column: 1 !important;
+    grid-row: 1 / 3 !important;
+}
+
+section.gallery-section .gallery-wide {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+}
+
+section.gallery-section .gallery-item:hover img.gallery-image {
+    transform: scale(1.03) !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    section.gallery-section .gallery-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+    }
+
+    section.gallery-section .gallery-large,
+    section.gallery-section .gallery-wide {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+
+    section.gallery-section .gallery-item {
+        height: 280px !important;
+    }
+
+}
