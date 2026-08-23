@@ -1,7 +1,270 @@
 /* =========================================
    CODE FOR ME — SUMMER 2026
    ========================================= */
+/* =========================================
+   INTERACTIVE TEACHER NETWORK
+========================================== */
 
+.teacher-network {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 600px !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    border-radius: 30px !important;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(40, 190, 180, 0.12),
+            transparent 42%
+        ),
+        rgba(10, 25, 30, 0.96) !important;
+    border: 1px solid rgba(100, 220, 210, 0.18) !important;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.25),
+        inset 0 0 80px rgba(50, 200, 190, 0.04) !important;
+}
+
+
+/* =========================================
+   ORBITS
+========================================== */
+
+.network-orbit {
+    position: absolute !important;
+    border: 1px solid rgba(100, 220, 210, 0.10) !important;
+    border-radius: 50% !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    pointer-events: none !important;
+}
+
+.orbit-one {
+    width: 42% !important;
+    height: 42% !important;
+}
+
+.orbit-two {
+    width: 68% !important;
+    height: 68% !important;
+}
+
+.orbit-three {
+    width: 91% !important;
+    height: 91% !important;
+}
+
+
+/* =========================================
+   CONNECTION LINES
+========================================== */
+
+.network-lines {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+}
+
+.network-lines line {
+    stroke: rgba(80, 210, 200, 0.18) !important;
+    stroke-width: 1.5 !important;
+    stroke-dasharray: 7 9 !important;
+    animation: networkFlow 3s linear infinite !important;
+    transform-origin: center !important;
+}
+
+@keyframes networkFlow {
+    to {
+        stroke-dashoffset: -32;
+    }
+}
+
+
+/* =========================================
+   CENTER NODE
+========================================== */
+
+.network-center {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 125px !important;
+    height: 125px !important;
+    transform: translate(-50%, -50%) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10 !important;
+}
+
+.center-core {
+    position: relative !important;
+    width: 72px !important;
+    height: 72px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: #102b30 !important;
+    border: 2px solid #62d8cf !important;
+    color: #62d8cf !important;
+    font-family: monospace !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+    box-shadow:
+        0 0 25px rgba(98, 216, 207, 0.3),
+        0 0 70px rgba(98, 216, 207, 0.12) !important;
+}
+
+.network-center span {
+    margin-top: 10px !important;
+    color: rgba(255,255,255,0.55) !important;
+    font-family: monospace !important;
+    font-size: 8px !important;
+    letter-spacing: 2px !important;
+}
+
+.center-pulse {
+    position: absolute !important;
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 50% !important;
+    border: 1px solid #62d8cf !important;
+    animation: centerPulse 2.5s ease-out infinite !important;
+}
+
+@keyframes centerPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(2.1);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   TEACHER NODES
+========================================== */
+
+.teacher-node {
+    position: absolute !important;
+    width: 42px !important;
+    height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: #18363a !important;
+    border: 1px solid rgba(98, 216, 207, 0.55) !important;
+    color: #8de5df !important;
+    font-family: monospace !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    z-index: 5 !important;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease !important;
+}
+
+.teacher-node:hover,
+.teacher-node.active {
+    background: #62d8cf !important;
+    color: #102b30 !important;
+    transform: scale(1.3) !important;
+    box-shadow:
+        0 0 20px rgba(98, 216, 207, 0.6),
+        0 0 50px rgba(98, 216, 207, 0.2) !important;
+}
+
+
+/* =========================================
+   NODE POSITIONS
+========================================== */
+
+.node-1  { left: calc(50% - 21px); top: 5%; }
+.node-2  { left: 70%; top: 12%; }
+.node-3  { right: 7%; top: 32%; }
+.node-4  { right: 5%; top: 57%; }
+.node-5  { left: 73%; bottom: 9%; }
+.node-6  { left: calc(50% - 21px); bottom: 3%; }
+.node-7  { left: 23%; bottom: 9%; }
+.node-8  { left: 5%; top: 57%; }
+.node-9  { left: 7%; top: 32%; }
+.node-10 { left: 28%; top: 12%; }
+
+
+/* =========================================
+   COUNTER
+========================================== */
+
+.network-counter {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 18px !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
+    z-index: 20 !important;
+}
+
+.network-counter strong {
+    color: #62d8cf !important;
+    font-family: monospace !important;
+    font-size: 24px !important;
+}
+
+.network-counter span {
+    color: rgba(255,255,255,0.4) !important;
+    font-family: monospace !important;
+    font-size: 8px !important;
+    letter-spacing: 1.5px !important;
+}
+
+
+/* =========================================
+   TOOLTIP
+========================================== */
+
+.teacher-tooltip {
+    position: absolute !important;
+    top: 18px !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(-5px) !important;
+    padding: 7px 12px !important;
+    border-radius: 20px !important;
+    background: rgba(255,255,255,0.07) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    color: rgba(255,255,255,0.55) !important;
+    font-family: monospace !important;
+    font-size: 8px !important;
+    letter-spacing: 1px !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+    pointer-events: none !important;
+}
+
+.teacher-tooltip.visible {
+    opacity: 1 !important;
+}
+
+.teacher-tooltip strong {
+    color: #62d8cf !important;
+}
 :root {
     --navy: #172b3a;
     --navy-dark: #0d1c28;
