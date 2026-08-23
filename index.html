@@ -539,19 +539,114 @@
         </div>
 
 
-        <div class="network-dots">
+        <!-- =========================================
+     INTERACTIVE TEACHER NETWORK
+========================================== -->
 
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+<div class="teacher-network" id="teacherNetwork">
 
+    <div class="network-orbit orbit-one"></div>
+    <div class="network-orbit orbit-two"></div>
+    <div class="network-orbit orbit-three"></div>
+
+    <!-- CONNECTION LINES -->
+    <svg
+        class="network-lines"
+        viewBox="0 0 600 600"
+        preserveAspectRatio="none"
+    >
+        <line x1="300" y1="300" x2="300" y2="65"></line>
+        <line x1="300" y1="300" x2="435" y2="105"></line>
+        <line x1="300" y1="300" x2="520" y2="220"></line>
+        <line x1="300" y1="300" x2="535" y2="350"></line>
+        <line x1="300" y1="300" x2="455" y2="475"></line>
+        <line x1="300" y1="300" x2="300" y2="535"></line>
+        <line x1="300" y1="300" x2="145" y2="475"></line>
+        <line x1="300" y1="300" x2="65" y2="350"></line>
+        <line x1="300" y1="300" x2="80" y2="220"></line>
+        <line x1="300" y1="300" x2="165" y2="105"></line>
+    </svg>
+
+
+    <!-- CENTER -->
+    <div class="network-center">
+
+        <div class="center-pulse"></div>
+
+        <div class="center-core">
+            CFM
         </div>
+
+        <span>
+            CODE FOR ME
+        </span>
+
+    </div>
+
+
+    <!-- TEACHERS -->
+    <div class="teacher-node node-1" data-teacher="01">
+        <span>01</span>
+    </div>
+
+    <div class="teacher-node node-2" data-teacher="02">
+        <span>02</span>
+    </div>
+
+    <div class="teacher-node node-3" data-teacher="03">
+        <span>03</span>
+    </div>
+
+    <div class="teacher-node node-4" data-teacher="04">
+        <span>04</span>
+    </div>
+
+    <div class="teacher-node node-5" data-teacher="05">
+        <span>05</span>
+    </div>
+
+    <div class="teacher-node node-6" data-teacher="06">
+        <span>06</span>
+    </div>
+
+    <div class="teacher-node node-7" data-teacher="07">
+        <span>07</span>
+    </div>
+
+    <div class="teacher-node node-8" data-teacher="08">
+        <span>08</span>
+    </div>
+
+    <div class="teacher-node node-9" data-teacher="09">
+        <span>09</span>
+    </div>
+
+    <div class="teacher-node node-10" data-teacher="10">
+        <span>10</span>
+    </div>
+
+
+    <!-- LIVE COUNTER -->
+    <div class="network-counter">
+
+        <strong id="teacherCount">0</strong>
+
+        <span>
+            TEACHERS CONNECTED
+        </span>
+
+    </div>
+
+
+    <!-- HOVER INFO -->
+    <div
+        class="teacher-tooltip"
+        id="teacherTooltip"
+    >
+        TEACHER <strong>01</strong>
+    </div>
+
+</div>
 
     </div>
 
