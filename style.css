@@ -4068,3 +4068,227 @@ section.gallery-section .gallery-item:nth-child(4) {
         left: 90px !important;
     }
 }
+
+/* =========================================
+   CLOSING SECTION
+========================================= */
+
+.closing {
+    position: relative !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+.closing-grid {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.closing-content {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+
+/* =========================================
+   CODE CREDIT / BUILT FROM SCRATCH
+========================================= */
+
+.code-credit {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 100px 24px 85px !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+}
+
+
+.code-credit-line {
+    width: 100% !important;
+    height: 1px !important;
+    margin: 0 0 75px !important;
+    padding: 0 !important;
+
+    background: currentColor !important;
+    opacity: 0.12 !important;
+}
+
+
+.code-credit-content {
+    width: 100% !important;
+    max-width: 850px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+
+/* EYEBROW */
+
+.code-credit-eyebrow {
+    display: block !important;
+    margin: 0 0 20px !important;
+    padding: 0 !important;
+
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+
+    opacity: 0.45 !important;
+}
+
+
+/* HEADING */
+
+.code-credit h2 {
+    margin: 0 auto 14px !important;
+    padding: 0 !important;
+
+    font-size: clamp(30px, 5vw, 52px) !important;
+    font-weight: 600 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.045em !important;
+
+    text-align: center !important;
+}
+
+
+/* DESCRIPTION */
+
+.code-credit p {
+    max-width: 600px !important;
+    margin: 0 auto 28px !important;
+    padding: 0 !important;
+
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+
+    text-align: center !important;
+    opacity: 0.55 !important;
+}
+
+
+/* CODE LINK */
+
+.code-credit-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+
+    margin: 0 !important;
+    padding: 0 0 5px !important;
+
+    color: inherit !important;
+    background: transparent !important;
+
+    text-decoration: none !important;
+
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid currentColor !important;
+    border-radius: 0 !important;
+
+    transition:
+        opacity 0.2s ease !important,
+        gap 0.2s ease !important;
+}
+
+
+.code-credit-link span {
+    display: inline-block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 16px !important;
+    line-height: 1 !important;
+}
+
+
+.code-credit-link:hover {
+    opacity: 0.6 !important;
+    gap: 12px !important;
+}
+
+
+/* SIGNATURE */
+
+.code-credit-byline {
+    margin: 65px 0 0 !important;
+    padding: 0 !important;
+
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.04em !important;
+
+    text-align: center !important;
+    opacity: 0.4 !important;
+}
+
+
+.code-credit-byline strong {
+    font-weight: 600 !important;
+    opacity: 1 !important;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+
+footer .copyright {
+    margin-top: 30px !important;
+    margin-bottom: 0 !important;
+
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.02em !important;
+
+    opacity: 0.55 !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .code-credit {
+        padding: 70px 20px 65px !important;
+    }
+
+    .code-credit-line {
+        margin-bottom: 55px !important;
+    }
+
+    .code-credit h2 {
+        font-size: 32px !important;
+        line-height: 1.08 !important;
+    }
+
+    .code-credit p {
+        font-size: 14px !important;
+    }
+
+    .code-credit-byline {
+        margin-top: 50px !important;
+    }
+
+}
