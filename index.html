@@ -1725,7 +1725,232 @@
 
 <!-- ========================================= CODE CREDIT ========================================== --> <section class="code-credit"> <div class="code-credit-inner"> <div class="code-credit-label"> <span></span> BUILT WITH CODE </div> <div class="code-credit-main"> <div> <h3> Curious how this newsletter <em>was made?</em> </h3> <p> Take a peek behind the scenes and explore the HTML, CSS & JavaScript that brings it to life. </p> </div> <a href="https://github.com/hsteenstra/augustnewsletter" class="code-credit-link" target="_blank" rel="noopener" > <span>View the code</span> <strong>↗</strong> </a> </div> <div class="code-credit-footer"> <span>HTML</span> <span>CSS</span> <span>JAVASCRIPT</span> <span>MADE FROM SCRATCH BY HARPER STEENSTRA</span> </div> </div> </section>
 
-<!-- ========================================= WE WANT TO HEAR FROM YOU ========================================== --> <section class="section feedback-section" id="feedback"> <div class="section-label"> 08 / YOUR TURN </div> <div class="feedback-heading"> <div> <span class="feedback-kicker"> WE WANT TO HEAR FROM YOU </span> <h2> What should we <br> <em>build next?</em> </h2> </div> <p> Code For ME is being built for real people. So tell us what would actually be useful. For your classroom, for your students at home, or for anyone who wants to learn. </p> </div> <form id="codeForMeFeedback" class="feedback-form" action="https://formspree.io/f/mvkpjdjd" method="POST" > <!-- CATEGORY --> <div class="feedback-field"> <label for="ideaType"> I'M LOOKING FOR... </label> <select id="ideaType" name="Idea Type" required > <option value="" disabled selected> Choose one </option> <option value="Classroom resources"> Classroom resources </option> <option value="Student lessons"> Lessons for students </option> <option value="At-home learning"> Learning resources for home </option> <option value="Projects"> Coding projects </option> <option value="Camps and workshops"> Camps or workshops </option> <option value="Something completely new"> Something completely new </option> </select> </div> <!-- IDEA --> <div class="feedback-field"> <label for="idea"> YOUR IDEA </label> <textarea id="idea" name="Idea" rows="6" placeholder="I'd love to see Code For ME..." required ></textarea> </div> <!-- OPTIONAL NAME / EMAIL --> <div class="feedback-two-column"> <div class="feedback-field"> <label for="name"> YOUR NAME <span>OPTIONAL</span> </label> <input type="text" id="name" name="Name" placeholder="Your name" > </div> <div class="feedback-field"> <label for="email"> YOUR EMAIL <span>OPTIONAL</span> </label> <input type="email" id="email" name="Email" placeholder="you@example.com" > </div> </div> <!-- HONEYPOT SPAM PROTECTION --> <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="feedback-honeypot" > <!-- SUBMIT --> <div class="feedback-submit-row"> <div class="feedback-submit-copy"> <strong> Have an idea? </strong> <span> We genuinely want to hear it. </span> </div> <button type="submit" class="feedback-submit" id="feedbackSubmit" > <span id="feedbackButtonText"> SEND MY IDEA </span> <strong> → </strong> </button> </div> <!-- SUCCESS --> <div class="feedback-message feedback-success" id="feedbackSuccess" aria-live="polite" > <span>✓</span> <div> <strong> Idea received. </strong> <p> Thanks for helping us decide what comes next. </p> </div> </div> <!-- ERROR --> <div class="feedback-message feedback-error" id="feedbackError" aria-live="polite" > Something went wrong. Please try again. </div> </form> </section>
+<!-- =========================================
+     WE WANT TO HEAR FROM YOU
+========================================== -->
+
+<section class="section feedback-section" id="feedback">
+
+    <div class="section-label">
+        08 / YOUR TURN
+    </div>
+
+
+    <div class="feedback-heading">
+
+        <div>
+
+            <span class="feedback-kicker">
+                WE WANT TO HEAR FROM YOU
+            </span>
+
+            <h2>
+                What should we
+                <br>
+                <em>build next?</em>
+            </h2>
+
+        </div>
+
+        <p>
+            Code For ME is being built for real people.
+            So tell us what would actually be useful.
+            For your classroom, for your students at home,
+            or for anyone who wants to learn.
+        </p>
+
+    </div>
+
+
+    <form
+        id="codeForMeFeedback"
+        class="feedback-form"
+        action="https://formspree.io/f/mvkpjdjd"
+        method="POST"
+    >
+
+        <!-- CATEGORY -->
+
+        <div class="feedback-field">
+
+            <label for="ideaType">
+                I'M LOOKING FOR...
+            </label>
+
+            <select
+                id="ideaType"
+                name="Idea Type"
+                required
+            >
+
+                <option value="" disabled selected>
+                    Choose one
+                </option>
+
+                <option value="Classroom resources">
+                    Classroom resources
+                </option>
+
+                <option value="Student lessons">
+                    Lessons for students
+                </option>
+
+                <option value="At-home learning">
+                    Learning resources for home
+                </option>
+
+                <option value="Projects">
+                    Coding projects
+                </option>
+
+                <option value="Camps and workshops">
+                    Camps or workshops
+                </option>
+
+                <option value="Something completely new">
+                    Something completely new
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- IDEA -->
+
+        <div class="feedback-field">
+
+            <label for="idea">
+                YOUR IDEA
+            </label>
+
+            <textarea
+                id="idea"
+                name="Idea"
+                rows="6"
+                placeholder="I'd love to see Code For ME..."
+                required
+            ></textarea>
+
+        </div>
+
+
+        <!-- OPTIONAL NAME / EMAIL -->
+
+        <div class="feedback-two-column">
+
+            <div class="feedback-field">
+
+                <label for="name">
+                    YOUR NAME
+                    <span>OPTIONAL</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="Name"
+                    placeholder="Your name"
+                >
+
+            </div>
+
+
+            <div class="feedback-field">
+
+                <label for="email">
+                    YOUR EMAIL
+                    <span>OPTIONAL</span>
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="Email"
+                    placeholder="you@example.com"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- HONEYPOT SPAM PROTECTION -->
+
+        <input
+            type="text"
+            name="_gotcha"
+            tabindex="-1"
+            autocomplete="off"
+            class="feedback-honeypot"
+        >
+
+
+        <!-- SUBMIT -->
+
+        <div class="feedback-submit-row">
+
+            <div class="feedback-submit-copy">
+                <strong>
+                    Have an idea?
+                </strong>
+
+                <span>
+                    We genuinely want to hear it.
+                </span>
+            </div>
+
+            <button
+                type="submit"
+                class="feedback-submit"
+                id="feedbackSubmit"
+            >
+                <span id="feedbackButtonText">
+                    SEND MY IDEA
+                </span>
+
+                <strong>
+                    →
+                </strong>
+            </button>
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            class="feedback-message feedback-success"
+            id="feedbackSuccess"
+            aria-live="polite"
+        >
+            <span>✓</span>
+
+            <div>
+                <strong>
+                    Idea received.
+                </strong>
+
+                <p>
+                    Thanks for helping us decide what comes next.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            class="feedback-message feedback-error"
+            id="feedbackError"
+            aria-live="polite"
+        >
+            Something went wrong. Please try again.
+        </div>
+
+    </form>
+
+</section>
 
 
         <!-- =========================================
