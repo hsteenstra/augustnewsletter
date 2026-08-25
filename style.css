@@ -3,6 +3,311 @@
    ========================================= */
 /* ========================================= WE WANT TO HEAR FROM YOU ========================================= */ .feedback-section { position: relative; overflow: hidden; padding-top: 130px !important; padding-bottom: 120px !important; background: #f3f0e8 !important; } .feedback-heading { display: grid; grid-template-columns: 1.15fr .85fr; gap: 80px; align-items: end; margin-top: 45px; margin-bottom: 65px; } .feedback-kicker { display: inline-block; margin-bottom: 20px; font-size: 10px; font-weight: 900; letter-spacing: .18em; color: #168c80; } .feedback-heading h2 { margin: 0; font-size: clamp(52px, 7vw, 105px); line-height: .88; letter-spacing: -.065em; color: #07131f; } .feedback-heading h2 em { font-family: Georgia, serif; font-weight: 400; } .feedback-heading > p { max-width: 480px; margin: 0 0 5px; font-size: 17px; line-height: 1.75; color: #52606a; } .feedback-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: rgba(7,19,31,.12); border: 1px solid rgba(7,19,31,.12); } .feedback-card { position: relative; display: grid; grid-template-columns: 50px 1fr; gap: 25px; min-height: 220px; padding: 35px; background: #f3f0e8; transition: background .3s ease, transform .3s ease; } .feedback-card:hover { background: #fff; transform: translateY(-3px); z-index: 2; } .feedback-number { font-size: 11px; font-weight: 900; letter-spacing: .1em; color: #168c80; } .feedback-card h3 { margin: 0 0 12px; font-size: 25px; letter-spacing: -.03em; color: #07131f; } .feedback-card p { max-width: 390px; margin: 0; font-size: 14px; line-height: 1.7; color: #68737b; } .feedback-bottom { display: flex; align-items: center; justify-content: space-between; gap: 40px; margin-top: 2px; padding: 38px 35px; background: #07131f; color: #fff; } .feedback-bottom .small-label { color: #5ee6d0; } .feedback-bottom h3 { margin: 8px 0 0; font-size: 24px; letter-spacing: -.025em; } .feedback-bottom .button-dark { background: #fff; color: #07131f; white-space: nowrap; } .feedback-bottom .button-dark:hover { background: #5ee6d0; } @media (max-width: 800px) { .feedback-heading { grid-template-columns: 1fr; gap: 30px; } .feedback-grid { grid-template-columns: 1fr; } .feedback-bottom { flex-direction: column; align-items: flex-start; } } @media (max-width: 550px) { .feedback-section { padding-top: 90px !important; padding-bottom: 80px !important; } .feedback-card { grid-template-columns: 35px 1fr; padding: 28px 22px; } }
 /* =========================================
+   WE WANT TO HEAR FROM YOU
+========================================= */
+
+.feedback-section {
+    position: relative;
+    overflow: hidden;
+    padding-top: 130px !important;
+    padding-bottom: 125px !important;
+    background: #f3f0e8 !important;
+}
+
+.feedback-heading {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 80px;
+    align-items: end;
+    margin-top: 45px;
+    margin-bottom: 65px;
+}
+
+.feedback-kicker {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .18em;
+    color: #168c80;
+}
+
+.feedback-heading h2 {
+    margin: 0;
+    font-size: clamp(52px, 7vw, 105px);
+    line-height: .88;
+    letter-spacing: -.065em;
+    color: #07131f;
+}
+
+.feedback-heading h2 em {
+    font-family: Georgia, serif;
+    font-weight: 400;
+}
+
+.feedback-heading > p {
+    max-width: 480px;
+    margin: 0 0 5px;
+    font-size: 17px;
+    line-height: 1.75;
+    color: #52606a;
+}
+
+
+/* FORM */
+
+.feedback-form {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px;
+    background: #07131f;
+    color: #fff;
+    box-shadow: 0 30px 80px rgba(7,19,31,.15);
+}
+
+
+/* FIELDS */
+
+.feedback-field {
+    margin-bottom: 28px;
+}
+
+.feedback-field label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .16em;
+    color: rgba(255,255,255,.48);
+}
+
+.feedback-field label span {
+    margin-left: 8px;
+    color: rgba(255,255,255,.25);
+}
+
+.feedback-field input,
+.feedback-field select,
+.feedback-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 0;
+    background: rgba(255,255,255,.045);
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color .25s ease,
+        background .25s ease;
+}
+
+.feedback-field input,
+.feedback-field select {
+    height: 58px;
+    padding: 0 18px;
+}
+
+.feedback-field textarea {
+    min-height: 170px;
+    padding: 18px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.feedback-field input::placeholder,
+.feedback-field textarea::placeholder {
+    color: rgba(255,255,255,.28);
+}
+
+.feedback-field select {
+    cursor: pointer;
+}
+
+.feedback-field select option {
+    background: #07131f;
+    color: #fff;
+}
+
+.feedback-field input:focus,
+.feedback-field select:focus,
+.feedback-field textarea:focus {
+    border-color: #5ee6d0;
+    background: rgba(94,230,208,.05);
+}
+
+
+/* TWO COLUMNS */
+
+.feedback-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+
+/* SUBMIT */
+
+.feedback-submit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 12px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.feedback-submit-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.feedback-submit-copy strong {
+    font-size: 15px;
+}
+
+.feedback-submit-copy span {
+    font-size: 12px;
+    color: rgba(255,255,255,.42);
+}
+
+.feedback-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 17px 23px;
+    border: 0;
+    background: #5ee6d0;
+    color: #07131f;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    cursor: pointer;
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+.feedback-submit strong {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.feedback-submit:hover {
+    transform: translateY(-3px);
+    background: #fff;
+}
+
+.feedback-submit:disabled {
+    opacity: .6;
+    cursor: wait;
+    transform: none;
+}
+
+
+/* SUCCESS / ERROR */
+
+.feedback-message {
+    display: none;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+    padding: 18px 20px;
+    font-size: 13px;
+}
+
+.feedback-message strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.feedback-message p {
+    margin: 0;
+    color: rgba(255,255,255,.55);
+}
+
+.feedback-success {
+    border: 1px solid rgba(94,230,208,.25);
+    background: rgba(94,230,208,.06);
+}
+
+.feedback-success > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #5ee6d0;
+    color: #07131f;
+    font-weight: 900;
+}
+
+.feedback-error {
+    border: 1px solid rgba(255,100,100,.25);
+    background: rgba(255,100,100,.06);
+    color: #ffaaaa;
+}
+
+
+/* HIDDEN SPAM FIELD */
+
+.feedback-honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .feedback-heading {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .feedback-form {
+        padding: 30px 22px;
+    }
+
+    .feedback-two-column {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .feedback-submit-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .feedback-submit {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .feedback-section {
+        padding-top: 90px !important;
+        padding-bottom: 90px !important;
+    }
+
+    .feedback-heading h2 {
+        font-size: 52px;
+    }
+
+}
+/* =========================================
    INTERACTIVE TEACHER NETWORK
 ========================================== */
 
